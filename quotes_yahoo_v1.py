@@ -47,6 +47,7 @@ def get_historical_prices(tickers,source,start_date,end_date):
     failed = ''
     done = ''
     new_data = []
+
     for i in range(len(tickers)):  # for every ticker
         res = None
         for s in range(3):
@@ -58,7 +59,18 @@ def get_historical_prices(tickers,source,start_date,end_date):
                     new_data.append(dates)
                     new_data.append(prices)
                 else:
-                    new_data.append(prices)
+                    iline = []                      # array of prices
+                    # print('\n',tickers[i],'newdata ',new_data[0])
+                    for ii in range(len(new_data[0])):  # for each date in dates for tickers[0]
+                        # print(ii,'dates ',dates)
+                        if new_data[0][ii] in dates:    # we check if this date is in dates for ticker[i]
+                            ip = dates.index(new_data[0][ii])   # if yes then append corresponding price
+                            iline.append(prices[ip])
+                            # print('ip iline ',ip,iline)
+                        else:
+                            iline.append('NA')                  # or append NA
+                            # print(ip,'ip NA iline ', iline)
+                    new_data.append(iline)
                 res = True
                 if s == 0:
                     att_n = str(s+1)+' st'
@@ -70,8 +82,7 @@ def get_historical_prices(tickers,source,start_date,end_date):
                 break
             except:
                 pass
-        # print(tickers[i],dates)
-        # print(len(prices),prices)
+
         if res == None:
             print('no price for:  ' + tickers[i],s)
             failed = failed + tickers[i] + '\n'
@@ -81,6 +92,8 @@ def get_historical_prices(tickers,source,start_date,end_date):
             u = len(dates)
             prices_NA = ['NA'] * u
             new_data.append(prices_NA)
+    # for ii in range(len(tickers)):
+    #     print(new_data[ii])
     if failed == '':
         messagebox.showinfo('Download summary', 'Prices downloaded for:\n'+done)
     else:
@@ -124,13 +137,11 @@ def  datafile_update(stock_list_in_file,quotes_in_file, stock_list_menu,new_data
     for k in range(len(stock_list_menu)):
         if stock_list_menu[k] not in stock_list_in_file:
             tics_add.append(stock_list_menu[k])
-
     for p in range(len(tics_rem) - 1, -1, -1):      # removing columns (tickers and prices)
         k = stock_list_in_file.index(tics_rem[p])
         for l in quotes_in_file:
             l.pop(k + 1)  # k+1 because element 0 is date
         stock_list_in_file.pop(k)  # shortened
-
     quotes_updated = []
     for j in range(len(quotes_in_file)):
         row = []
@@ -215,7 +226,10 @@ def show_last_prices(fname):
     prices = clean_txt[-1].split(',')
     txt = str(prices[0])+'\nPrice\tEquity'
     for k in range(1,len(header)):
-        txt = txt + '\n' + str("{0:.2f}".format(float(prices[k]))) + '\t' + header[k]
+        try:
+            txt = txt + '\n' + str("{0:.2f}".format(float(prices[k]))) + '\t' + header[k]
+        except:
+            txt = txt + '\n' + str(prices[k]) + '\t' + header[k]
 
     root = Tk()
     root.title('The last date prices')

@@ -131,24 +131,30 @@ def  datafile_update(stock_list_in_file,quotes_in_file, stock_list_menu,new_data
     tics_rem = []
     tics_add = []
     numb_of_stocks_in_file = len(stock_list_in_file)
+    # print('numb stocks in file before rem/add: ',numb_of_stocks_in_file)
     for k in range(len(stock_list_in_file)):
         if stock_list_in_file[k] not in stock_list_menu:
             tics_rem.append(stock_list_in_file[k])
     for k in range(len(stock_list_menu)):
         if stock_list_menu[k] not in stock_list_in_file:
             tics_add.append(stock_list_menu[k])
+    # print('remove ',tics_rem,'  add ',tics_add)
     for p in range(len(tics_rem) - 1, -1, -1):      # removing columns (tickers and prices)
         k = stock_list_in_file.index(tics_rem[p])
+        # print('removing ',k,stock_list_in_file[k])
         for l in quotes_in_file:
-            l.pop(k + 1)  # k+1 because element 0 is date
-        stock_list_in_file.pop(k)  # shortened
+            l.pop(k + 1)  # k+1 because element 0 is a date (removing price in a row "l" in column "k+1"
+        stock_list_in_file.pop(k)  # shortened (stock in column "k" removed
+        # print('numb stocks after rem/add: ', len(stock_list_in_file))
+        # print('numb columns in quotes table: ',len(quotes_in_file[0]))
     quotes_updated = []
     for j in range(len(quotes_in_file)):
         row = []
-        for k in range(numb_of_stocks_in_file + 1):
-            row.append(quotes_in_file[j][k])
-        quotes_updated.append(row)
-    stock_list_updated = stock_list_in_file[:]
+        for k in range(len(stock_list_in_file) + 1):  # number of columns is now different
+            row.append(quotes_in_file[j][k])  # building a row of prices
+        quotes_updated.append(row)  # quotes_updated building up
+    stock_list_updated = stock_list_in_file[
+                         :]  # stock_list_in_file is actually updated list (not as in original file), renaming...
  
     for k in range(len(tics_add)):
         stock_list_updated.append(tics_add[k])

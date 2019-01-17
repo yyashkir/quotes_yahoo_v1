@@ -1,0 +1,90 @@
+
+
+Application "quotes_yahoo_v0.py" last modified 25/01/2018
+Required interpreter: python 3
+Required modules: pandas_datareader, time, datetime, tkinter, matplotlib, numpy, os, glob, os, shutil, webbrowser
+
+Datafile name is set permanently as "quotes.csv" (cannot be changed in this version)
+Configuration file is "menu.conf". Its content by default is:
+
+Download new data:No,Yes
+From:''
+To:''
+Buy criterium (%):0.5
+Sell criterium (%):2
+Moving average (days):25
+Moving average (days):100
+Backup file:quotes_bk.csv
+Mode:Trade MA,Trade LINEAR,Trade UPDOWN,Monitor
+Trend length (days):20
+
+    The last 7 lines can be modified (to have more choices).
+
+        INTERFACE (left panel):
+"Download new data" choice of  "No" or "Yes"
+"From"              set start date (default is the last date in data file)
+"To"                set end date (default is the date today)
+                    Date range in data file is displayed for convenience (between buttons "RUN" and "Quit'")
+"Buy criterium"   percentage drop PD of the stock price
+"Sell criterium"    percentage rise PR of the stock price: 
+	 (see more detailes in sections 
+		"Trade MA", "Trade LINEAR", "Trade UPDOWN", "Monitor")
+"Moving average S and L (days)"    Stock price moving averages (default  is 20 for S and 100 days for L)
+"Backup file"                   Autobackup of the data file (can be changed)
+"Mode"		Choice of backtesting ("Trade MA", or "Trade LINEAR", or "Trade UPDOWN") 
+		or monitoring current prices		("Monitor")
+"Trend length"		number of days for linear approximation of historical stock prices
+
+        INTERFACE (central panel "Ticker_Company Name"):
+List of stock tickers and corresponding company names(format  TICKER_COMPANYNAME)
+You can delete or add several ticker_names. Data file is modified automatically.
+
+        INTERFACE (right panel "Unselect/Select tickers"):
+Tickers of stockes in central panel are displayed. Price charts are displayed for
+selected tickers only.
+
+    CONTROL BUTTONS
+"HELP", "RUN" and "Quit"    have obvious function.
+"Copyright"                 opens web site www.yashkir.com in the internet browser
+"Open/Edit data file"		opens data file in the text widget for information and for editing (should be rarely 
+			used, if necessary has to be saved by pressing button "Save")
+"Last date prices"	is	for information only.
+
+Backtesting modes:
+For every historical stock price P the Moving Average S (MA), trend linear approximation LA, and the trend 
+slope TS are calculated. The signal BUY or SELL or WAIT is then generated depending on the trading mode.
+
+	"Trade MA"
+BUY   if TS > 0    and P < MA * (1 - PD)
+SELL  if TS <= 0 and P > MA * (1 + PR)
+WAIT otherwise
+
+	"Trade LINEAR"
+BUY   if TS > 0 and P  <  LA  * (1 - PD)
+SELL  if TS > 0 and P >= LA * (1 + PR)
+WAIT otherwise
+
+	"Trade UPDOWN"
+BUY   if  P  <  P(at start) * (1 - PD)
+SELL  if  P  > P(at start) * (1 + PR)
+WAIT otherwise
+
+Monitor mode "Monitor":
+For the latest stock price all three above criteria are calculated and displayed.
+
+WARNING!
+The backtesting modes are designed for research purposes (mainly, to identify best parameters).
+Recommendations in the "Monitor" mode are based on historical prices and should be considered
+together with other information about company before making trading decision.
+
+Any errors, bugs, deficiencies, undesired limitations, proposals should be sent to:
+yuri.yashkir@gmail.com
+
+Recommended parameters
+
+
+
+
+
+
+Copyright © 2018 YASHKIR CONSULTING

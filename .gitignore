@@ -1,0 +1,12 @@
+/.idea
+/.vs
+*.xml
+*.iml
+*.suo
+**/for_html
+*_*.csv
+*.bak
+*.pyproj
+*.sln
+*.gif
+*.png

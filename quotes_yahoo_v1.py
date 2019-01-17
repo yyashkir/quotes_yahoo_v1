@@ -6,7 +6,8 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox
 import matplotlib.pyplot as pyplot
-from matplotlib.finance import date2num
+from matplotlib.dates import date2num
+#from matplotlib.finance import date2num
 import numpy
 import math
 import os
@@ -395,9 +396,9 @@ def trade_on_MA(tics_to_display,tickers,names,delt,quote_list,date_from,date_to,
         period_extra_days = int(days_span - period_y * year_days)
         period_txt = str(period_y)+' years + ' + str(period_extra_days) + ' days'
         date_info = str(t[0].date()) + ' to ' + str(t[-1].date()) + ' (' + period_txt+')'
-        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='white',fontweight='bold')
-        pyplot.ylabel('Price',color='white',fontweight='bold',rotation = 45)
-        pyplot.xlabel(graphtext, color='white', fontweight='bold', rotation=0)
+        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='navy',fontweight='bold')
+        pyplot.ylabel('Price',color='navy',fontweight='bold',rotation = 45)
+        pyplot.xlabel(graphtext, color='navy', fontweight='bold', rotation=0)
         ax = pyplot.gca()
         x0 = 0.05
         y0 = 0.95
@@ -425,7 +426,7 @@ def trade_on_MA(tics_to_display,tickers,names,delt,quote_list,date_from,date_to,
         pyplot.yticks([0,1], " ")
         pyplot.text(0, 1, trade_log, horizontalalignment='left', verticalalignment='top',
                     color='blue')
-        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='white',
+        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='navy',
                      fontweight='bold')
         pyplot.show()
 
@@ -579,9 +580,9 @@ def trade_linear(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
         period_extra_days = int(days_span - period_y * year_days)
         period_txt = str(period_y)+' years + ' + str(period_extra_days) + ' days'
         date_info = str(t[0].date()) + ' to ' + str(t[-1].date()) + ' (' + period_txt+')'
-        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='white',fontweight='bold')
-        pyplot.ylabel('Price',color='white',fontweight='bold',rotation = 45)
-        pyplot.xlabel(graphtext, color='white', fontweight='bold', rotation=0)
+        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='navy',fontweight='bold')
+        pyplot.ylabel('Price',color='navy',fontweight='bold',rotation = 45)
+        pyplot.xlabel(graphtext, color='navy', fontweight='bold', rotation=0)
         ax = pyplot.gca()
         x0 = 0.05
         y0 = 0.95
@@ -608,7 +609,7 @@ def trade_linear(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
         pyplot.yticks([0,1], " ")
         pyplot.text(0, 1, trade_log, horizontalalignment='left', verticalalignment='top',
                     color='blue')
-        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='white',
+        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='navy',
                      fontweight='bold')
         pyplot.show()
 
@@ -769,9 +770,9 @@ def trade_updown(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
         period_extra_days = int(days_span - period_y * year_days)
         period_txt = str(period_y)+' years + ' + str(period_extra_days) + ' days'
         date_info = str(t[0].date()) + ' to ' + str(t[-1].date()) + ' (' + period_txt+')'
-        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='white',fontweight='bold')
-        pyplot.ylabel('Price',color='white',fontweight='bold',rotation = 45)
-        pyplot.xlabel(graphtext, color='white', fontweight='bold', rotation=0)
+        pyplot.title('Backtesting: '+tickers[j]+' ('+names[j]+') \n'+ date_info, color='navy',fontweight='bold')
+        pyplot.ylabel('Price',color='navy',fontweight='bold',rotation = 45)
+        pyplot.xlabel(graphtext, color='navy', fontweight='bold', rotation=0)
         ax = pyplot.gca()
         x0 = 0.05
         y0 = 0.95
@@ -799,7 +800,7 @@ def trade_updown(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
         pyplot.yticks([0,1], " ")
         pyplot.text(0, 1, trade_log, horizontalalignment='left', verticalalignment='top',
                     color='blue')
-        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='white',
+        pyplot.title('Backtesting: ' + tickers[j] + ' (' + names[j] + ') \n' + date_info, color='navy',
                      fontweight='bold')
         pyplot.show()
 
@@ -929,9 +930,9 @@ def monitor(tics_to_display,tickers,names,delt,quote_list,date_from,date_to,buy_
         period_extra_days = int(days_span - period_y * year_days)
         period_txt = str(period_y)+' years + ' + str(period_extra_days) + ' days'
         date_info = str(t[0].date()) + ' to ' + str(t[-1].date()) + ' (' + period_txt+')'
-        pyplot.title(tickers[j]+' ('+names[j]+'): $'+ last_price +  '\n'+ date_info, color='white',fontweight='bold')
-        pyplot.ylabel('Price',color='white',fontweight='bold',rotation = 45)
-        pyplot.xlabel(graphtext, color='white', fontweight='bold', rotation=0)
+        pyplot.title(tickers[j]+' ('+names[j]+'): $'+ last_price +  '\n'+ date_info, color='navy',fontweight='bold')
+        pyplot.ylabel('Price',color='navy',fontweight='bold',rotation = 45)
+        pyplot.xlabel(graphtext, color='navy', fontweight='bold', rotation=0)
         ax = pyplot.gca()
         x0 = 0.05
         y0 = 0.95
@@ -1118,7 +1119,7 @@ def show_edit_txt_file(file_name,title,width,image_file):
     if image_file != '':
         photo = PhotoImage(master=root, file='yy.gif')
         content.image_create(END, image=photo, align='baseline')
-    Button(root, bg='black', fg='white', text='Save', font=("Arial", 12, "bold"), command=lambda: save_widget_text(content, file_name)).grid(row=3, column=0, columnspan=2, sticky=E)
+    Button(root, bg='black', fg='navy', text='Save', font=("Arial", 12, "bold"), command=lambda: save_widget_text(content, file_name)).grid(row=3, column=0, columnspan=2, sticky=E)
     Button(root, bg='black', fg='red', text='Close window (if saved the program restart is required)',font=("Arial", 12, "bold"), command=lambda: root.destroy()).grid(row=4, column=0, columnspan=2, sticky=W + E)
     root.mainloop()
 
@@ -1170,7 +1171,7 @@ def menu_function(file_range,menu_names,menu_values, stock_list_in_file,quotes_i
     tickers_titles = Text(man, width=40, height=txt_win_height, font=("Times", 12, 'italic'),background="light cyan", foreground="blue")
     tickers_titles.insert(INSERT, stock_text)
     tickers_titles.grid(row=1, column=2, rowspan=20,sticky= N+S)
-    Label(man, text="Ticker_Company Name\n(Remove or add if desired)", borderwidth=1, background="gray30",foreground="white")\
+    Label(man, text="Ticker_Company Name\n(Remove or add if desired)", borderwidth=1, background="white",foreground="navy")\
         .grid(row=0, column=2, sticky=N+W + E)
 
     tics_in_file = ''
@@ -1180,30 +1181,30 @@ def menu_function(file_range,menu_names,menu_values, stock_list_in_file,quotes_i
     # selection menu starts here
     valores = StringVar()
     valores.set(tics_in_file)
-    lstbox = Listbox(man, listvariable=valores, selectmode=MULTIPLE,  height=30,background="antique white", foreground="blue",font=("Arial", 10, "bold"))
+    lstbox = Listbox(man, listvariable=valores, selectmode=MULTIPLE,  height=30,background="yellow", foreground="blue",font=("Arial", 10, "bold"))
     for k in range(len(tics_in_file)):
         lstbox.select_set(k)
     lstbox.grid(column=3, row=1,rowspan=20,sticky= N+S)
 
-    Label(man, text="Unselect/Select tickers \nfor displaying charts", borderwidth=1,background="gray40", foreground="white")\
+    Label(man, text="Unselect/Select tickers \nfor displaying charts", borderwidth=1,background="yellow", foreground="navy")\
         .grid(row=0, column=3, sticky=W+E)
 
     Button(man,height=1,bg='light blue',activebackground='red', fg='dark blue',bd = 2,text='RUN',font=("Arial",12,"bold"),command = lambda:
         run(lstbox,valores,pars,tickers_titles,quotes_in_file,quote_file_name,stock_list_in_file))\
         .grid(row=k+2,column=0,columnspan=2,sticky= W+E)
     # row k+3   is not used
-    Button(man, height=1, bg='white',activebackground='red', fg='dark blue', text='HELP', font=("Arial", 10, "bold"),command=lambda:
+    Button(man, height=1, bg='blue',activebackground='red', fg='navy', text='HELP', font=("Arial", 10, "bold"),command=lambda:
     show_edit_txt_file('help', 'Help',100,'yy.gif')).grid(row=k+4, column=3, sticky=W + E)
-    Label(man, text=file_info, borderwidth=5, bg="steel blue",activebackground='red', fg="white")\
+    Label(man, text=file_info, borderwidth=5, bg="steel blue",activebackground='red', fg="navy")\
         .grid(row=k + 2, column=2, columnspan=1,sticky=W + E)
-    Button(man, height=1, bg='gray30',activebackground='red', fg='white', text='Open/edit data file',
+    Button(man, height=1, bg='gray30',activebackground='red', fg='navy', text='Open/edit data file',
            font=("Arial", 10, "bold"), command=lambda: show_edit_txt_file(quote_file_name, 'Data', 200,'')).grid(row=k + 4, column=0, columnspan=1, sticky=W + E)
-    Button(man, height=1, bg='black',activebackground='red', fg='white', text='Last date prices',
+    Button(man, height=1, bg='black',activebackground='red', fg='navy', text='Last date prices',
            font=("Arial", 10, "bold"), command=lambda: show_last_prices(quote_file_name))\
         .grid(row=k + 4, column=1,columnspan=1, sticky=W + E)
-    Button(man,bg='white',activebackground='red',fg='red',text='Quit',font=("Arial",10,"bold"),command = lambda:
+    Button(man,bg='blue',activebackground='red',fg='red',text='Quit',font=("Arial",10,"bold"),command = lambda:
         exit(man)).grid(row=k+2,column=3,columnspan=1,sticky=W+ E)
-    Button(man, height=1, bg='gray30',activebackground='red', fg='white', text='Copyright © 2018 YASHKIR CONSULTING', font=("Arial", 10, "bold"),command=lambda:
+    Button(man, height=1, bg='gray30',activebackground='red', fg='navy', text='Copyright © 2018 YASHKIR CONSULTING', font=("Arial", 10, "bold"),command=lambda:
         callback()).grid(row=k+4, column=2, columnspan = 1, sticky=W+E)
 
     man.mainloop()

@@ -1,10 +1,10 @@
-/.idea
+**/.idea
 /.vs
 *.xml
 *.iml
 *.suo
 **/for_html
-*_*.csv
+*bk*.csv
 *.bak
 *.pyproj
 *.sln

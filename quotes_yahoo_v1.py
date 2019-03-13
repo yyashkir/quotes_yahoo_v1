@@ -7,7 +7,6 @@ from tkinter import *
 from tkinter import messagebox
 import matplotlib.pyplot as pyplot
 from matplotlib.dates import date2num
-#from matplotlib.finance import date2num
 import numpy
 import math
 import os
@@ -29,7 +28,6 @@ def calc_date_span(date_from,date_to,t):
             end_point = i
     return(start_point,end_point)
 
-
 def save_2D_list(header,alist,file):
     f = open(file,'w')
     if len(header) != 0:
@@ -42,7 +40,6 @@ def save_2D_list(header,alist,file):
         for k in range(1,len(alist[j])):
             f.write(','+ str(alist[j][k]))
     f.close()
-
 
 def get_historical_prices(tickers,source,start_date,end_date):
     failed = ''
@@ -61,16 +58,13 @@ def get_historical_prices(tickers,source,start_date,end_date):
                     new_data.append(prices)
                 else:
                     iline = []                      # array of prices
-                    # print('\n',tickers[i],'newdata ',new_data[0])
                     for ii in range(len(new_data[0])):  # for each date in dates for tickers[0]
                         # print(ii,'dates ',dates)
                         if new_data[0][ii] in dates:    # we check if this date is in dates for ticker[i]
                             ip = dates.index(new_data[0][ii])   # if yes then append corresponding price
                             iline.append(prices[ip])
-                            # print('ip iline ',ip,iline)
                         else:
                             iline.append('NA')                  # or append NA
-                            # print(ip,'ip NA iline ', iline)
                     new_data.append(iline)
                 res = True
                 if s == 0:
@@ -93,8 +87,6 @@ def get_historical_prices(tickers,source,start_date,end_date):
             u = len(dates)
             prices_NA = ['NA'] * u
             new_data.append(prices_NA)
-    # for ii in range(len(tickers)):
-    #     print(new_data[ii])
     if failed == '':
         messagebox.showinfo('Download summary', 'Prices downloaded for:\n'+done)
     else:
@@ -132,22 +124,17 @@ def  datafile_update(stock_list_in_file,quotes_in_file, stock_list_menu,new_data
     tics_rem = []
     tics_add = []
     numb_of_stocks_in_file = len(stock_list_in_file)
-    # print('numb stocks in file before rem/add: ',numb_of_stocks_in_file)
     for k in range(len(stock_list_in_file)):
         if stock_list_in_file[k] not in stock_list_menu:
             tics_rem.append(stock_list_in_file[k])
     for k in range(len(stock_list_menu)):
         if stock_list_menu[k] not in stock_list_in_file:
             tics_add.append(stock_list_menu[k])
-    # print('remove ',tics_rem,'  add ',tics_add)
     for p in range(len(tics_rem) - 1, -1, -1):      # removing columns (tickers and prices)
         k = stock_list_in_file.index(tics_rem[p])
-        # print('removing ',k,stock_list_in_file[k])
         for l in quotes_in_file:
             l.pop(k + 1)  # k+1 because element 0 is a date (removing price in a row "l" in column "k+1"
         stock_list_in_file.pop(k)  # shortened (stock in column "k" removed
-        # print('numb stocks after rem/add: ', len(stock_list_in_file))
-        # print('numb columns in quotes table: ',len(quotes_in_file[0]))
     quotes_updated = []
     for j in range(len(quotes_in_file)):
         row = []
@@ -729,13 +716,9 @@ def trade_updown(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
                 buy_schedule.append(t[i].date())
                 buy_points.append(y[i])
                 trade_log = trade_log + '\n ' + str("{0:.2f}".format(stock_num)) + ' stocks bought at ' + str("{0:.2f}".format(y[i])) + ' on ' + str(t[i].date())
-                # print(str(t[i].date()) + ': Bought '+str("{0:.2f}".format(stock_num))+' stocks at '+str("{0:.2f}".format(y[i])))
-
             #sell event
             if stock_num > 0 and y[i] >= trade_price * (1. + up) and slope <=0:
                 trade_log = trade_log + '\n ' + str("{0:.2f}".format(stock_num)) + ' stocks sold at ' + str("{0:.2f}".format(y[i])) + ' on ' + str(t[i].date())
-                # print(str(t[i].date()) + ': Sold ' + str("{0:.2f}".format(stock_num)) + ' stocks at ' + str(
-                #     "{0:.2f}".format(y[i])))
                 trade_price = y[i]
                 cash = stock_num * y[i]
                 trade_schedule.append(t[i])
@@ -786,7 +769,6 @@ def trade_updown(tics_to_display,tickers,names,delt,quote_list,date_from,date_to
 
         graph.plot_date(t,y,'-',markersize=4,color='grey')
         graph.plot_date(t,moving_short,'-',color='red')
-        # graph.plot_date(t,moving_long,'-',color='black')
         graph.plot_date(buy_schedule, buy_points, 'o', color='blue', fillstyle='none')
         graph.plot_date(sell_schedule, sell_points, 'o', color = 'red', fillstyle='none')
         graph.plot_date(trade_schedule, trade_value, 'o',color = 'black', fillstyle = 'full')
@@ -1028,13 +1010,11 @@ def run(lstbox,valores,pars,tickers_titles,quotes_in_file,quote_file_name,stock_
                 try:
                     quotes_updated[i][j] = float(quotes_updated[i][j])      # converting string to float
                 except ValueError:
-                    # print( quotes_updated[i][j])
                     quotes_updated[i][j] = 'NA'
 
     if mode == 'Monitor':
         monitor(tics_to_display, tickers, names, delt, quotes_updated, date_from, date_to, buy_criterium,
                     sell_criterium, mov_aver_days_short, mov_aver_days_long, trend_days)
-        # make_graphs(tics_to_display,tickers,names,delt,quotes_updated,date_from,date_to,buy_criterium,sell_criterium,mov_aver_days_short,mov_aver_days_long,trend_days)        # graphs
 
     if mode == 'Trade LINEAR':
         trade_linear(tics_to_display, tickers, names, delt, quotes_updated, date_from, date_to, buy_criterium, sell_criterium,
@@ -1224,4 +1204,4 @@ menu_values[ind][0] = now
 menu_function(file_range,menu_names,menu_values, stock_list_in_file,quotes_in_file,quote_file_name)
 
 # 'Copyright © 2017 YASHKIR CONSULTING'
-#   Last updated 25/01/2018
+#   Last updated 13/03/2019

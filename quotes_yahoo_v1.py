@@ -989,9 +989,8 @@ def run(lstbox,valores,pars,tickers_titles,quotes_in_file,quote_file_name,stock_
 
     new_data = []
     if task == 'Yes':    # for stocks in menu
-        source = 'yahoo'    #'google'
+        source = 'yahoo'    #'google' #
         new_data = get_historical_prices(tickers, source,start_date,end_date)
-
     stock_list_updated, quotes_updated,tickers,names = datafile_update(stock_list_in_file,quotes_in_file, stock_list_menu,new_data,quote_file_name)
     tics_2choos_from = tickers[0]
     for k in range(1,len(tickers)):
